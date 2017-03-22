@@ -40,7 +40,6 @@ class MessageParser():
 
     def parse_history(self,payload):
         return_string = str(payload['timestamp'])+': Chat history>\n'
-        msg_list = payload['content'].split("\n")
-        for msg in msg_list:
-            return_string+=self.parse_message(json.loads(msg)) + '\n'
-        return return_string
+        for msg in payload['content']:
+            return_string += self.parse_message(json.loads(msg)) + '\n'
+        return return_string.rstrip()

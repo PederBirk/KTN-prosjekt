@@ -70,7 +70,7 @@ class ClientHandler(SocketServer.BaseRequestHandler):
         self.username = user
         users[user] = self.connection
         self.loggedin = True
-        payload = {'timestamp':asctime(),'sender':'server','response':'info','content':'User logged in.'}
+        payload = {'timestamp':asctime(),'sender':'server','response':'info','content':'Logged in as ' + user}
         self.send(payload, self.connection)
 
 
@@ -114,8 +114,8 @@ class ClientHandler(SocketServer.BaseRequestHandler):
             self.handle_error('User not logged in')
             return
 			
-        content = "\n".join(history)
-        payload = {'timestamp':asctime(),'sender':'server','response':'history','content':content}
+        #content = "\n".join(history)
+        payload = {'timestamp':asctime(),'sender':'server','response':'history','content':history}
         self.send(payload, self.connection)
 
     def handle_error(self, error):
